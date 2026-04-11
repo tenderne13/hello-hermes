@@ -1,2 +1,3 @@
-hermes-agent/
 .DS_Store
+hermes-agent/
+__pycache__/

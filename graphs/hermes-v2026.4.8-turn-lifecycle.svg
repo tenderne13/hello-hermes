@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1740" width="1440" height="1740">
+  <style>
+    text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      fill: #111827;
+    }
+    .title { font-size: 28px; font-weight: 600; }
+    .subtitle { font-size: 14px; fill: #6b7280; }
+    .frame-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; fill: #9ca3af; }
+    .node-type { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; fill: #9ca3af; }
+    .node-title { font-size: 15px; font-weight: 600; }
+    .node-sub { font-size: 12px; fill: #4b5563; }
+    .tag { font-size: 11px; fill: #6b7280; }
+    .frame { fill: none; stroke: #e5e7eb; stroke-width: 1.2; stroke-dasharray: 5 5; }
+    .node { fill: #f9fafb; stroke: #e5e7eb; stroke-width: 1.2; }
+    .edge { fill: none; stroke: #3b82f6; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .edge-soft { fill: none; stroke: #93c5fd; stroke-width: 1.4; stroke-dasharray: 6 6; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <defs>
+    <marker id="arrow-blue" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-soft" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#93c5fd"/>
+    </marker>
+  </defs>
+
+  <rect width="1440" height="1740" fill="#ffffff"/>
+
+  <g transform="translate(56,48)">
+    <text x="0" y="0" class="title">Hermes Agent v2026.4.8 Turn Lifecycle</text>
+    <text x="0" y="30" class="subtitle">用更顺的主链 + 左侧工具回环，展示一次 turn 的完整处理过程</text>
+  </g>
+
+  <g transform="translate(60,108)">
+    <rect x="0" y="0" width="1320" height="1580" rx="24" class="frame"/>
+    <text x="20" y="26" class="frame-label">PRIMARY FLOW</text>
+  </g>
+  <g transform="translate(92,1180)">
+    <rect x="0" y="0" width="560" height="420" rx="20" class="frame"/>
+    <text x="20" y="26" class="frame-label">TOOL LOOP</text>
+  </g>
+  <g transform="translate(860,1180)">
+    <rect x="0" y="0" width="470" height="430" rx="20" class="frame"/>
+    <text x="20" y="26" class="frame-label">RESPONSE</text>
+  </g>
+
+  <g transform="translate(500,140)">
+    <rect x="0" y="0" width="440" height="66" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">INPUT</text>
+    <text x="220" y="41" text-anchor="middle" class="node-title">用户输入</text>
+  </g>
+
+  <g transform="translate(540,252)">
+    <polygon points="180,0 360,50 180,100 0,50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.2"/>
+    <text x="180" y="44" text-anchor="middle" class="node-title">turn 路由</text>
+    <text x="180" y="65" text-anchor="middle" class="node-sub">resolve_turn_route()</text>
+  </g>
+
+  <g transform="translate(500,398)">
+    <rect x="0" y="0" width="440" height="68" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">AGENT BOOT</text>
+    <text x="220" y="43" text-anchor="middle" class="node-title">必要时重建 AIAgent</text>
+  </g>
+
+  <g transform="translate(500,512)">
+    <rect x="0" y="0" width="440" height="68" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">MAIN LOOP</text>
+    <text x="220" y="43" text-anchor="middle" class="node-title">run_conversation()</text>
+  </g>
+
+  <g transform="translate(500,626)">
+    <rect x="0" y="0" width="440" height="82" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">RESTORE</text>
+    <text x="220" y="42" text-anchor="middle" class="node-title">恢复运行时与历史</text>
+    <text x="220" y="61" text-anchor="middle" class="node-sub">primary runtime / history / todo</text>
+  </g>
+
+  <g transform="translate(500,754)">
+    <rect x="0" y="0" width="440" height="68" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">PROMPT</text>
+    <text x="220" y="43" text-anchor="middle" class="node-title">System Prompt 冻结</text>
+  </g>
+
+  <g transform="translate(500,868)">
+    <rect x="0" y="0" width="440" height="68" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">COMPRESSION</text>
+    <text x="220" y="43" text-anchor="middle" class="node-title">Preflight compression</text>
+  </g>
+
+  <g transform="translate(500,982)">
+    <rect x="0" y="0" width="440" height="90" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">PAYLOAD</text>
+    <text x="220" y="42" text-anchor="middle" class="node-title">组装 API payload</text>
+    <text x="220" y="62" text-anchor="middle" class="node-sub">memory prefetch / plugin context / user message</text>
+  </g>
+
+  <g transform="translate(540,1118)">
+    <polygon points="180,0 360,50 180,100 0,50" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.2"/>
+    <text x="180" y="44" text-anchor="middle" class="node-title">是否返回 tool_calls</text>
+    <text x="180" y="65" text-anchor="middle" class="node-sub">主循环分叉点</text>
+  </g>
+
+  <g transform="translate(176,1216)">
+    <rect x="0" y="0" width="380" height="72" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">DISPATCH</text>
+    <text x="190" y="45" text-anchor="middle" class="node-title">_execute_tool_calls()</text>
+  </g>
+
+  <g transform="translate(118,1336)">
+    <rect x="0" y="0" width="184" height="86" rx="18" class="node"/>
+    <text x="24" y="20" class="node-type">SPECIAL CASE</text>
+    <text x="92" y="42" text-anchor="middle" class="node-title">agent loop</text>
+    <text x="92" y="61" text-anchor="middle" class="node-sub">todo / memory</text>
+  </g>
+  <g transform="translate(346,1336)">
+    <rect x="0" y="0" width="244" height="86" rx="18" class="node"/>
+    <text x="24" y="20" class="node-type">FALLBACK</text>
+    <text x="122" y="42" text-anchor="middle" class="node-title">普通工具回落</text>
+    <text x="122" y="61" text-anchor="middle" class="node-sub">handle_function_call() / dispatch</text>
+  </g>
+
+  <g transform="translate(176,1470)">
+    <rect x="0" y="0" width="380" height="86" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">RESULT</text>
+    <text x="190" y="42" text-anchor="middle" class="node-title">工具结果写回 messages</text>
+    <text x="190" y="61" text-anchor="middle" class="node-sub">继续 loop 或收敛到最终响应</text>
+  </g>
+
+  <g transform="translate(930,1230)">
+    <rect x="0" y="0" width="330" height="72" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">RESPONSE</text>
+    <text x="165" y="45" text-anchor="middle" class="node-title">生成 final_response</text>
+  </g>
+  <g transform="translate(930,1350)">
+    <rect x="0" y="0" width="330" height="86" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">PERSISTENCE</text>
+    <text x="165" y="42" text-anchor="middle" class="node-title">持久化</text>
+    <text x="165" y="61" text-anchor="middle" class="node-sub">session log / SessionDB / transcript</text>
+  </g>
+  <g transform="translate(930,1484)">
+    <rect x="0" y="0" width="330" height="72" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">OUTPUT</text>
+    <text x="165" y="45" text-anchor="middle" class="node-title">主响应返回用户</text>
+  </g>
+  <g transform="translate(930,1604)">
+    <rect x="0" y="0" width="330" height="86" rx="18" class="node"/>
+    <text x="28" y="20" class="node-type">ASYNC REVIEW</text>
+    <text x="165" y="42" text-anchor="middle" class="node-title">后台复盘</text>
+    <text x="165" y="61" text-anchor="middle" class="node-sub">memory / skill review / next recall</text>
+  </g>
+
+  <path d="M 720 206 C 720 224, 720 236, 720 252" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 720 352 C 720 372, 720 384, 720 398" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 720 466 C 720 486, 720 498, 720 512" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 720 580 C 720 598, 720 612, 720 626" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 720 708 C 720 726, 720 740, 720 754" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 720 822 C 720 840, 720 854, 720 868" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 720 936 C 720 954, 720 968, 720 982" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 720 1072 C 720 1090, 720 1104, 720 1118" class="edge" marker-end="url(#arrow-blue)"/>
+
+  <path d="M 540 1168 C 442 1186, 352 1200, 286 1216" class="edge" marker-end="url(#arrow-blue)"/>
+  <text x="450" y="1178" text-anchor="middle" class="tag">是</text>
+  <path d="M 900 1168 C 980 1184, 1038 1200, 1094 1230" class="edge" marker-end="url(#arrow-blue)"/>
+  <text x="972" y="1178" text-anchor="middle" class="tag">否</text>
+
+  <path d="M 366 1288 C 314 1302, 250 1320, 210 1336" class="edge-soft" marker-end="url(#arrow-soft)"/>
+  <path d="M 366 1288 C 402 1300, 448 1318, 468 1336" class="edge-soft" marker-end="url(#arrow-soft)"/>
+  <path d="M 210 1422 C 222 1440, 256 1456, 320 1470" class="edge-soft" marker-end="url(#arrow-soft)"/>
+  <path d="M 468 1422 C 462 1442, 424 1458, 412 1470" class="edge-soft" marker-end="url(#arrow-soft)"/>
+
+  <path d="M 556 1512 C 686 1512, 842 1366, 930 1266" class="edge" marker-end="url(#arrow-blue)"/>
+  <text x="760" y="1392" text-anchor="middle" class="tag">收敛</text>
+  <path d="M 176 1512 C 94 1512, 92 1142, 500 1026" class="edge-soft" marker-end="url(#arrow-soft)"/>
+  <text x="134" y="1286" text-anchor="middle" class="tag">继续 loop</text>
+
+  <path d="M 1095 1302 C 1095 1320, 1095 1332, 1095 1350" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 1095 1436 C 1095 1454, 1095 1468, 1095 1484" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 1095 1556 C 1095 1574, 1095 1588, 1095 1604" class="edge" marker-end="url(#arrow-blue)"/>
+</svg>

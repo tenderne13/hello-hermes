@@ -23,7 +23,7 @@ pytest tests/ -q --ignore=tests/integration --ignore=tests/e2e --tb=short -n aut
 pytest tests/tools/test_approval.py -v
 
 # Run hermes locally
-python -c "from cli import main; main()"
+python -m hermes_cli.main
 
 # Lint/typecheck website
 cd website && npm install && npm run typecheck
@@ -54,6 +54,17 @@ hermes script → hermes_cli.main:main() → cmd_chat() → cli.main() → Herme
 - `hermes_state.py:SessionDB` — SQLite with FTS5 full-text search
 - `gateway/run.py:GatewayRunner` — messaging platform lifecycle
 
+**File dependency chain:**
+```
+tools/registry.py  (no deps — imported by all tool files)
+       ↑
+tools/*.py  (each calls registry.register() at import time)
+       ↑
+model_tools.py  (imports tools/registry + triggers tool discovery)
+       ↑
+run_agent.py, cli.py, batch_runner.py, environments/
+```
+
 ## Key Design Patterns
 
 **Self-registering tools**: Each `tools/*.py` module calls `registry.register()` at import time. Tool discovery happens in `model_tools._discover_tools()`.
@@ -67,6 +78,11 @@ hermes script → hermes_cli.main:main() → cmd_chat() → cli.main() → Herme
 **Provider abstraction**: Works with any OpenAI-compatible API (OpenRouter, Nous Portal, custom endpoints). Provider resolution at init time.
 
 **Context compression**: When approaching token limits, `ContextCompressor` does structured summarization with `Goal/Progress/Key Decisions/Relevant Files/Next Steps/Critical Context` handoff format.
+
+**Adding a tool (3-file pattern)**:
+1. Create `tools/your_tool.py` with `registry.register()` call
+2. Add import to `_modules` list in `model_tools.py`
+3. Add to `toolsets.py` (`_HERMES_CORE_TOOLS` or new toolset)
 
 ## Important Conventions
 
@@ -92,3 +108,7 @@ User config lives in `~/.hermes/` (not in the repo):
 - `hermes-agent/CONTRIBUTING.md` — full contributing guide with architecture overview and tool/skill authoring patterns
 - Root-level `hermes-agent v2026.4.8 源代码分析.md` — Chinese-language architecture analysis (reference material)
 - `hermes-agent/website/` — Docusaurus documentation site
+
+## Commit Identity & Co-Authorship Rules
+
+Follow the canonical commit identity rules in `AGENTS.md`.

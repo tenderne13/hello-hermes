@@ -31,21 +31,34 @@ Pytest is the test runner, with `pytest-xdist` enabled by default and `integrati
 
 The active history in `hermes-agent/` uses Conventional Commits such as `fix(process): ...` and `feat(cli): ...`; continue that pattern. PRs should follow `.github/PULL_REQUEST_TEMPLATE.md`: link the issue, summarize the change, provide clear reproduction or verification steps, and note documentation or config updates. Include screenshots or logs when UI, CLI output, or docs rendering changes.
 
+When committing as an AI tool, the commit author and `Co-authored-by` MUST both match the tool identity making the commit.
+
+| Committing Tool | Author | Co-authored-by |
+| :-------------- | :----- | :------------- |
+| Claude | `Claude <noreply@anthropic.com>` | `Co-authored-by: Claude <noreply@anthropic.com>` |
+| Codex | `Codex <noreply@openai.com>` | `Co-authored-by: Codex <noreply@openai.com>` |
+| Gemini | `Gemini <noreply@google.com>` | `Co-authored-by: Gemini <noreply@google.com>` |
+| OpenCode | `OpenCode <opencode@ai.local>` | `Co-authored-by: OpenCode <opencode@ai.local>` |
+
+```bash
+git commit -m "<type>(<scope>): <message>" \
+  --author="<ToolName> <noreply@xxx.com>" \
+  -m "Co-authored-by: <ToolName> <noreply@xxx.com>"
+```
+
 ## Diagram Generation (fireworks-tech-graph Skill)
 
 When generating diagrams using the `fireworks-tech-graph` skill, **strictly observe these quality rules**:
 
 ### Line & Arrow Quality (CRITICAL - Negative Examples Observed)
 
-- **路径必须连接到形状边界，不能停在半空**: When a path goes from a diamond decision to a box, the horizontal line must reach the box's left or right edge. A common defect is: `d="M 594 836 L 448 836"` where 448 is the box's left edge but the path stops short at some intermediate point. The path should be: `d="M 588 836 L 144 836 L 144 866"` where the line actually reaches the box boundary at x=144.
-  - Wrong: `d="M 594 836 L 448 836"` (stops short of box at x=124)
-  - Correct: `d="M 588 836 L 124 836 L 124 857"` (reaches the box edge)
-- **垂直路径向下延伸时必须到达下一个形状**: When routing from a diamond downward, the vertical path must extend to the next shape's boundary, not stop midway. Example: from `y=1372` diamond to `y=1516` box should have `d="M 700 1484 L 700 1516"` where 1516 is the box's top Y.
-- **向上走的loopback路径不能在viewBox边界截断**: When a path goes upward (retry/fallback loop), ensure `d` starts below viewBox top or use a U-turn that stays visible. A common defect: path going to `y=-10` before turning, which gets clipped at `y=0`.
-  - Wrong: `d="M 924 1878 L 840 1878 L 840 1618 L 970 1618"` where 1618 is inside the viewBox but the upward segment from 1878 to 1618 passes outside visible area
-  - Correct: Route the loopback to stay within viewBox, e.g., turn at y=1740 instead of going to 1618, or extend viewBox height
+- **路径必须连接到形状边界，不能停在半空**: When a path goes from a decision node to a box, the curve must terminate on the target shape boundary, not at an intermediate control point.
+  - Wrong: `d="M 594 836 C 520 836 480 836 448 836"` when the target box actually starts at `x=124`
+  - Correct: `d="M 588 836 C 420 836 180 836 124 857"` so the endpoint lands on the box edge
+- **垂直延伸必须到达下一个形状**: When routing downward with a smooth path, the endpoint must still reach the next shape boundary. Example: from a diamond at `y=1372` to a box at `y=1516`, the path should end at `y=1516`, not stop midway.
+- **向上走的 loopback 路径不能在 viewBox 边界截断**: When a path loops upward, keep the entire rounded arc visible inside the viewBox. Do not send a control point or turn above `y=0`.
+- **使用圆角路径，不要使用直角折线**: Prefer rounded connectors built with `C` or `Q` commands and `stroke-linejoin="round"`. Avoid Manhattan-style `L` corner chains unless there is no reasonable curved alternative.
 - **所有箭头必须完整**: All arrowheads must be fully rendered. The path must extend **at least 15px past** the marker reference point (refX). Truncated arrows are unacceptable.
-- **正交路由优先**: Prefer orthogonal paths (horizontal + vertical segments) over diagonal lines. Use `L` commands for right-angle routing.
 
 ### Text & Box Sizing (CRITICAL - Negative Examples Observed)
 
@@ -61,6 +74,12 @@ When generating diagrams using the `fireworks-tech-graph` skill, **strictly obse
 - **节点间距 ≥ 80px**: Minimum 80px between node edges (increased from 60px) for proper arrow routing.
 - **对齐网格**: Snap node centers to 120px horizontal intervals and 80px vertical intervals.
 - **Group padding**: Add `transform="translate(x, y)"` to `<g>` groups, never hardcode absolute coordinates on child elements.
+
+### Visual Style
+
+- **简约风格优先**: Prefer a clean documentation style with white background, subtle gray containers, and one restrained accent color for arrows.
+- **避免装饰性视觉元素**: No drop shadows, gradients, icons, or heavy fills unless the user explicitly asks for them.
+- **圆角节点**: Use rounded rectangles and soft container corners so the visual language matches the rounded connectors.
 
 ### Output Format
 
@@ -87,6 +106,8 @@ When generating diagrams using the `fireworks-tech-graph` skill, **strictly obse
 - [ ] All connecting lines have adequate length (not truncated due to space constraints)
 - [ ] Loopback paths stay within viewBox bounds
 - [ ] Box padding is at least 30px horizontal
+- [ ] Connector turns are rounded; no hard right-angle corners remain
+- [ ] Overall look stays minimal and documentation-friendly
 
 ### Output
 

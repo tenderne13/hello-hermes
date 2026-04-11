@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+"""Hermes Agent CLI 启动脚本。"""
+
+if __name__ == "__main__":
+    # 【文档锚点 1A】入口层：hermes 脚本把控制权转发给 hermes_cli.main:main()
+    from hermes_cli.main import main
+    main()  # 【文档锚点 1A】CLI 启动链的第一跳

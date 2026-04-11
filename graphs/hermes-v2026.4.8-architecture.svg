@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1140" width="1440" height="1140">
+  <style>
+    text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      fill: #111827;
+    }
+    .title { font-size: 28px; font-weight: 600; }
+    .subtitle { font-size: 14px; fill: #6b7280; }
+    .lane-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; fill: #9ca3af; }
+    .node-type { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; fill: #9ca3af; }
+    .node-title { font-size: 15px; font-weight: 600; }
+    .node-sub { font-size: 12px; fill: #4b5563; }
+    .edge-label { font-size: 11px; fill: #6b7280; }
+    .lane { fill: none; stroke: #e5e7eb; stroke-width: 1.2; stroke-dasharray: 5 5; }
+    .node { fill: #f9fafb; stroke: #e5e7eb; stroke-width: 1.2; }
+    .edge { fill: none; stroke: #3b82f6; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .edge-soft { fill: none; stroke: #93c5fd; stroke-width: 1.4; stroke-dasharray: 6 6; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <defs>
+    <marker id="arrow-blue" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-soft" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#93c5fd"/>
+    </marker>
+  </defs>
+
+  <rect width="1440" height="1140" fill="#ffffff"/>
+
+  <g transform="translate(56,48)">
+    <text x="0" y="0" class="title">Hermes Agent v2026.4.8 Architecture</text>
+    <text x="0" y="30" class="subtitle">用更干净的主链展示入口、外壳、编排、能力与持久化关系</text>
+  </g>
+
+  <g transform="translate(58,96)">
+    <rect x="0" y="0" width="1324" height="102" rx="20" class="lane"/>
+    <text x="20" y="26" class="lane-label">ENTRY</text>
+  </g>
+  <g transform="translate(58,226)">
+    <rect x="0" y="0" width="1324" height="102" rx="20" class="lane"/>
+    <text x="20" y="26" class="lane-label">BOOTSTRAP</text>
+  </g>
+  <g transform="translate(58,356)">
+    <rect x="0" y="0" width="1324" height="132" rx="20" class="lane"/>
+    <text x="20" y="26" class="lane-label">SHELL</text>
+  </g>
+  <g transform="translate(58,516)">
+    <rect x="0" y="0" width="1324" height="260" rx="20" class="lane"/>
+    <text x="20" y="26" class="lane-label">ORCHESTRATION</text>
+  </g>
+  <g transform="translate(58,804)">
+    <rect x="0" y="0" width="1324" height="118" rx="20" class="lane"/>
+    <text x="20" y="26" class="lane-label">CAPABILITIES</text>
+  </g>
+  <g transform="translate(58,950)">
+    <rect x="0" y="0" width="1324" height="136" rx="20" class="lane"/>
+    <text x="20" y="26" class="lane-label">PERSISTENCE</text>
+  </g>
+
+  <g transform="translate(174,118)">
+    <rect x="0" y="0" width="272" height="58" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">ENTRYPOINT</text>
+    <text x="136" y="40" text-anchor="middle" class="node-title">pyproject.toml</text>
+  </g>
+  <g transform="translate(584,118)">
+    <rect x="0" y="0" width="272" height="58" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">LAUNCHER</text>
+    <text x="136" y="40" text-anchor="middle" class="node-title">hermes</text>
+  </g>
+
+  <g transform="translate(534,248)">
+    <rect x="0" y="0" width="372" height="58" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">BOOTSTRAP</text>
+    <text x="186" y="40" text-anchor="middle" class="node-title">hermes_cli.main.main()</text>
+  </g>
+
+  <g transform="translate(110,390)">
+    <rect x="0" y="0" width="250" height="66" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">CLI SHELL</text>
+    <text x="125" y="42" text-anchor="middle" class="node-title">cli.py</text>
+  </g>
+  <g transform="translate(590,390)">
+    <rect x="0" y="0" width="260" height="66" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">COMMAND</text>
+    <text x="130" y="42" text-anchor="middle" class="node-title">cmd_chat()</text>
+  </g>
+  <g transform="translate(1080,390)">
+    <rect x="0" y="0" width="250" height="66" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">GATEWAY</text>
+    <text x="125" y="42" text-anchor="middle" class="node-title">gateway/run.py</text>
+  </g>
+
+  <g transform="translate(520,548)">
+    <rect x="0" y="0" width="400" height="66" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">ROUTING</text>
+    <text x="200" y="38" text-anchor="middle" class="node-title">smart_model_routing</text>
+    <text x="200" y="54" text-anchor="middle" class="node-sub">resolve_turn_route()</text>
+  </g>
+  <g transform="translate(570,638)">
+    <rect x="0" y="0" width="300" height="66" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">AGENT INIT</text>
+    <text x="150" y="42" text-anchor="middle" class="node-title">AIAgent.__init__()</text>
+  </g>
+  <g transform="translate(570,718)">
+    <rect x="0" y="0" width="300" height="66" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">MAIN LOOP</text>
+    <text x="150" y="42" text-anchor="middle" class="node-title">run_conversation()</text>
+  </g>
+  <g transform="translate(980,718)">
+    <rect x="0" y="0" width="280" height="66" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">ASYNC REVIEW</text>
+    <text x="140" y="42" text-anchor="middle" class="node-title">_spawn_background_review()</text>
+  </g>
+
+  <g transform="translate(86,830)">
+    <rect x="0" y="0" width="220" height="66" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">PROMPT</text>
+    <text x="110" y="40" text-anchor="middle" class="node-title">prompt_builder.py</text>
+  </g>
+  <g transform="translate(346,830)">
+    <rect x="0" y="0" width="220" height="66" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">MEMORY</text>
+    <text x="110" y="40" text-anchor="middle" class="node-title">memory_manager.py</text>
+  </g>
+  <g transform="translate(606,830)">
+    <rect x="0" y="0" width="220" height="66" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">TOOLS</text>
+    <text x="110" y="40" text-anchor="middle" class="node-title">model_tools.py</text>
+  </g>
+  <g transform="translate(866,830)">
+    <rect x="0" y="0" width="220" height="66" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">COMPRESSION</text>
+    <text x="110" y="40" text-anchor="middle" class="node-title">context_compressor.py</text>
+  </g>
+  <g transform="translate(1126,830)">
+    <rect x="0" y="0" width="220" height="66" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">SKILLS</text>
+    <text x="110" y="33" text-anchor="middle" class="node-title">skills_tool</text>
+    <text x="110" y="50" text-anchor="middle" class="node-sub">skill_manager_tool</text>
+  </g>
+
+  <g transform="translate(132,984)">
+    <rect x="0" y="0" width="286" height="74" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">SQLITE</text>
+    <text x="143" y="40" text-anchor="middle" class="node-title">hermes_state.SessionDB</text>
+    <text x="143" y="58" text-anchor="middle" class="node-sub">session / message / FTS5</text>
+  </g>
+  <g transform="translate(576,984)">
+    <rect x="0" y="0" width="286" height="74" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">LOG SNAPSHOT</text>
+    <text x="143" y="40" text-anchor="middle" class="node-title">run_agent JSON session log</text>
+    <text x="143" y="58" text-anchor="middle" class="node-sub">调试与兜底快照</text>
+  </g>
+  <g transform="translate(1020,984)">
+    <rect x="0" y="0" width="286" height="74" rx="16" class="node"/>
+    <text x="24" y="20" class="node-type">JSONL</text>
+    <text x="143" y="34" text-anchor="middle" class="node-title">gateway.session</text>
+    <text x="143" y="52" text-anchor="middle" class="node-sub">SessionStore transcript</text>
+  </g>
+
+  <path d="M 446 147 C 492 147, 536 147, 584 147" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 720 176 C 720 204, 720 222, 720 248" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 720 306 C 720 338, 720 360, 720 390" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 360 423 C 438 434, 484 500, 520 572" class="edge-soft" marker-end="url(#arrow-soft)"/>
+  <path d="M 850 423 C 850 464, 850 502, 850 548" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 1080 423 C 1004 434, 956 500, 920 572" class="edge-soft" marker-end="url(#arrow-soft)"/>
+  <path d="M 720 614 C 720 624, 720 628, 720 638" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 720 704 C 720 712, 720 714, 720 718" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 870 751 C 914 751, 950 751, 980 751" class="edge" marker-end="url(#arrow-blue)"/>
+
+  <path d="M 720 784 C 652 816, 242 820, 196 830" class="edge-soft" marker-end="url(#arrow-soft)"/>
+  <path d="M 720 784 C 620 816, 482 820, 456 830" class="edge-soft" marker-end="url(#arrow-soft)"/>
+  <path d="M 720 784 C 716 816, 716 820, 716 830" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 720 784 C 820 816, 1002 820, 976 830" class="edge-soft" marker-end="url(#arrow-soft)"/>
+  <path d="M 720 784 C 892 816, 1246 820, 1236 830" class="edge-soft" marker-end="url(#arrow-soft)"/>
+
+  <path d="M 720 784 C 630 918, 336 958, 275 984" class="edge-soft" marker-end="url(#arrow-soft)"/>
+  <path d="M 720 784 C 720 920, 719 958, 719 984" class="edge" marker-end="url(#arrow-blue)"/>
+  <path d="M 1120 784 C 1120 920, 1163 958, 1163 984" class="edge-soft" marker-end="url(#arrow-soft)"/>
+
+  <text x="516" y="137" text-anchor="middle" class="edge-label">console entry</text>
+  <text x="720" y="538" text-anchor="middle" class="edge-label">conversation route</text>
+  <text x="1120" y="742" text-anchor="middle" class="edge-label">post-turn review</text>
+  <text x="720" y="970" text-anchor="middle" class="edge-label">runtime outputs</text>
+</svg>
