@@ -16,7 +16,9 @@ C'est un espace de travail pour explorer et analyser [Hermes Agent](https://gith
 git clone https://github.com/nousresearch/hermes-agent
 ```
 
-- [Analyse du code source hermes-agent v2026.4.8](./源代码分析_v2026.4.8 .md)
+- [Analyse de l'architecture Hermes (1ère partie) : Flux · Cycle de vie complet de l'exécution du code source](./Hermes%20架构解析%20(一)：流程篇%20·%20源代码执行全生命周期.md)
+- [Analyse de l'architecture Hermes (2ème partie) : Données · Modèle d'état et gouvernance du contexte](./Hermes%20架构解析%20(二)：数据篇%20·%20状态模型与上下文治理.md)
+- [Analyse de l'architecture Hermes (3ème partie) : Extension · Guide complet du développement de plugins et de skills](./Hermes%20架构解析%20(三)：扩展篇%20·%20插件与技能开发全指南.md)
 
 ## Démarrage Rapide
 
