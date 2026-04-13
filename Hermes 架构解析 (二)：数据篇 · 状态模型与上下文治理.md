@@ -384,7 +384,7 @@ request_view = {
 ### 8.2 Mermaid：从恢复、投影、剪枝到再沉淀
 
 ```mermaid
-flowchart TD
+flowchart LR
     U[User Input] --> A[从 SQLite 恢复 Session Transcript]
     A --> B[形成 Runtime State<br/>messages / todo / cached system prompt]
 
